@@ -163,6 +163,19 @@ https://capsule-x-nu.vercel.app/api/capsule?type=rounded&color=00f2fe,4facfe&tex
 ![Contact](https://capsule-x-nu.vercel.app/api/capsule?type=wave2&color=eb3349,f45c43&text=Get%20In%20Touch!&fontSize=36&fontColor=ffffff&width=700&height=140&textAnim=flash&speed=0.8&v=1)
 ```
 
+### preview
+
+![Welcome](https://capsule-x-nu.vercel.app/api/capsule?type=wave&color=667eea,764ba2&text=Welcome%20to%20My%20Profile&fontSize=48&fontColor=ffffff&width=1200&height=260&textAnim=bounce&gradientAnim=true&speed=1.1&v=1)
+
+### 🚀 Currently Working On
+![Current](https://capsule-x-nu.vercel.app/api/capsule?type=blob&color=11998e,38ef7d&text=Open%20Source%20Projects&fontSize=32&fontColor=ffffff&width=900&height=180&textAnim=wave&v=1)
+
+### 💻 Tech Stack
+![Tech](https://capsule-x-nu.vercel.app/api/capsule?type=rounded&color=2193b0,6dd5ed&text=Full%20Stack%20Developer&fontSize=28&fontColor=ffffff&width=800&height=160&enableGlow=true&density=1.2&v=1)
+
+### 📫 Let's Connect
+![Contact](https://capsule-x-nu.vercel.app/api/capsule?type=wave2&color=eb3349,f45c43&text=Get%20In%20Touch!&fontSize=36&fontColor=ffffff&width=700&height=140&textAnim=flash&speed=0.8&v=1)
+
 ## Best Practices
 
 1. **Color Selection**: Choose gradients based on your theme:
