@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const shapes = [
   { id: 'wave', name: 'Wave', icon: '〰️', category: 'basic', special: 'bubbles' },
@@ -122,17 +123,16 @@ const ShapeSelector = ({ shape, onChange, onAnimationChange }) => {
         </div>
       )}
       
-      // Update the info message for rounded shape:
-{shape === 'rounded' && (
-  <div className="mb-4 p-3 bg-gradient-to-r from-purple-900/20 to-indigo-900/20 rounded-lg text-sm border border-purple-500/20">
-    <p className="text-purple-300">
-      ✨ Features diagonal neon bars streaming across the shape!
-    </p>
-    <p className="text-xs mt-1 text-purple-400">
-      Cyan and yellow glowing bars with continuous flow effect.
-    </p>
-  </div>
-)}
+      {shape === 'rounded' && (
+        <div className="mb-4 p-3 bg-gradient-to-r from-purple-900/20 to-indigo-900/20 rounded-lg text-sm border border-purple-500/20">
+          <p className="text-purple-300">
+            ✨ Features diagonal neon bars streaming across the shape!
+          </p>
+          <p className="text-xs mt-1 text-purple-400">
+            Cyan and yellow glowing bars with continuous flow effect.
+          </p>
+        </div>
+      )}
       
       {/* Shape Animation Options - Disable for blob */}
       <div className={shape === 'blob' ? 'opacity-50 pointer-events-none' : ''}>
@@ -140,29 +140,42 @@ const ShapeSelector = ({ shape, onChange, onAnimationChange }) => {
           Shape Animation {shape === 'blob' && '(Disabled for morphing blob)'}
         </label>
         <div className="grid grid-cols-4 gap-2">
-          {shapeAnimationOptions.map(anim => (
-            <motion.button
-              key={anim.id}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => onAnimationChange?.(anim.id)}
-              disabled={shape === 'blob'}
-              className={`p-2 rounded-lg border text-center transition-all ${
-                shape === 'blob' 
-                  ? 'border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 cursor-not-allowed'
-                  : anim.id === 'static' 
-                    ? 'border-gray-200 dark:border-gray-600 hover:border-gray-300'
-                    : 'border-purple-200 dark:border-purple-800 hover:border-purple-300'
-              }`}
-            >
-              <div className="text-lg">{anim.icon}</div>
-              <div className="text-xs mt-1">{anim.name}</div>
-            </motion.button>
-          ))}
+          {shapeAnimationOptions.map(anim => {
+            // Extract nested ternary logic
+            let buttonClasses = 'p-2 rounded-lg border text-center transition-all ';
+            if (shape === 'blob') {
+              buttonClasses += 'border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-800 cursor-not-allowed';
+            } else if (anim.id === 'static') {
+              buttonClasses += 'border-gray-200 dark:border-gray-600 hover:border-gray-300';
+            } else {
+              buttonClasses += 'border-purple-200 dark:border-purple-800 hover:border-purple-300';
+            }
+
+            return (
+              <motion.button
+                key={anim.id}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => onAnimationChange?.(anim.id)}
+                disabled={shape === 'blob'}
+                className={buttonClasses}
+              >
+                <div className="text-lg">{anim.icon}</div>
+                <div className="text-xs mt-1">{anim.name}</div>
+              </motion.button>
+            );
+          })}
         </div>
       </div>
     </div>
   );
+};
+
+// PropTypes validation
+ShapeSelector.propTypes = {
+  shape: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  onAnimationChange: PropTypes.func
 };
 
 export default ShapeSelector;

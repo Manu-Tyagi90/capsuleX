@@ -28,29 +28,33 @@ const ColorPicker = ({ color, onChange }) => {
 
   return (
     <div>
-      <label className="block text-sm font-medium mb-3 dark:text-gray-300">
+      <div className="text-sm font-medium mb-3 dark:text-gray-300">
         Color Theme
-      </label>
+      </div>
       
       {/* Preset Gradients */}
-      <div className="grid grid-cols-3 gap-2 mb-4">
-        {presetGradients.map((preset, index) => (
-          <motion.button
-            key={preset.name}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => selectPreset(preset)}
-            className="h-12 rounded-lg relative overflow-hidden group"
-            style={{
-              background: `linear-gradient(135deg, ${preset.colors}, ${preset.colors})`
-            }}
-          >
-            <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-medium opacity-0 group-hover:opacity-100 bg-black bg-opacity-30 transition-opacity">
-              {preset.name}
-            </span>
-          </motion.button>
-        ))}
-      </div>
+      <fieldset>
+        <legend className="sr-only">Preset color gradients</legend>
+        <div className="grid grid-cols-3 gap-2 mb-4">
+          {presetGradients.map((preset) => (
+            <motion.button
+              key={preset.name}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => selectPreset(preset)}
+              className="h-12 rounded-lg relative overflow-hidden group"
+              style={{
+                background: `linear-gradient(135deg, ${preset.colors[0]}, ${preset.colors[1]})`
+              }}
+              aria-label={`Select ${preset.name} gradient`}
+            >
+              <span className="absolute inset-0 flex items-center justify-center text-white text-xs font-medium opacity-0 group-hover:opacity-100 bg-black bg-opacity-30 transition-opacity">
+                {preset.name}
+              </span>
+            </motion.button>
+          ))}
+        </div>
+      </fieldset>
 
       {/* Custom Colors */}
       <div className="flex gap-4 items-center">
@@ -71,20 +75,18 @@ const ColorPicker = ({ color, onChange }) => {
                 }}
                 className="w-12 h-12 rounded-lg border-2 border-gray-300 dark:border-gray-600 cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple-500"
                 style={{ backgroundColor: c }}
-                role="button"
-                tabIndex={0}
-                aria-label={`Select color ${index + 1}`}
+                aria-label={`Select color ${index + 1}: ${c}`}
               />
               {showPicker && activeColor === index && (
                 <div className="absolute z-50 mt-2">
-                  <div 
-                    className="fixed inset-0" 
+                  <button 
+                    className="fixed inset-0 bg-transparent"
                     onClick={() => setShowPicker(false)}
                     onKeyDown={(e) => {
                       if (e.key === 'Escape') setShowPicker(false);
                     }}
                     tabIndex={-1}
-                    role="presentation"
+                    aria-label="Close color picker"
                   />
                   <ChromePicker
                     color={c}

@@ -35,7 +35,7 @@ const Header = () => {
             </motion.button>
             
             <motion.a
-              href="https://github.com/Manu_tyagi90/capsuleX"
+              href="https://github.com/Manu-Tyagi90/capsuleX"
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.1 }}
